@@ -5,6 +5,7 @@ import Doctor from "../models/doctorSchema.js";
 import { generateCookie } from "../getcookie/cookie.js";
 import doctorrequest from "../models/doctorsrequest.js";
 import nodemailer from "nodemailer";
+import logs from "../models/logs.js";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -283,12 +284,17 @@ export const transportmail = async (req, res) => {
     subject: "Verify Your Email - Doctor Online",
     html: newhtml,
   };
-  transporter.sendMail(mailOptions, (err, info) => {
+  transporter.sendMail(mailOptions, async (err, info) => {
     if (err) {
       console.log(err);
       return res.status(400).send("Some Error Occurred.");
     }
     console.log(email + " " + otp);
+    let log=new logs({
+      mail:email,
+      Otp:otp
+    })
+    await log.save();
     return res.status(200).send(`${otp}`);
   });
 };

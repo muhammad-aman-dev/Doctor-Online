@@ -21,6 +21,9 @@ const Login = () => {
   const [otp, setotp] = useState('')
   const [enteredotp, setenteredotp] = useState('')
   const [loginshow, setloginshow] = useState(true)
+  const [newpass, setnewpass] = useState('')
+  const [roleforreset, setroleforreset] = useState('')
+  const [confirmpass, setconfirmpass] = useState('')
 
   const Navigate = useNavigate();
 
@@ -34,8 +37,8 @@ const Login = () => {
   }
 
   async function handleotpbtn() {
-    if(emailforcode==''){
-      toast('Please Enter Mail First!')
+    if(emailforcode==''||roleforreset==''){
+      toast('Please Enter Mail and Role First!')
      return;
     }
     if(!emailforcode.endsWith('@gmail.com')){
@@ -58,21 +61,54 @@ const Login = () => {
     }
   }
    
+  const handlechangepass=async()=>{
+    if(newpass!=confirmpass){
+      toast('Passwords not match!');
+      setnewpass('')
+      setconfirmpass('')
+      return;
+    }
+    if(newpass.length<8){
+      toast('Password Length should be 8 characters.')
+      return;
+    }
+    let res=await axios.post(`${import.meta.env.VITE_BACKEND_URI}/modify/modifypassword`,{mail:emailforcode,role:roleforreset,password:newpass});
+    if(res.status==400){
+      toast(res.data);
+      return;
+    }
+    if(res.status==200){
+      toast(res.data);
+      setloginshow(true)
+      setotpbtnshow(true)
+      setverified(false)
+      setnewpass('')
+      setconfirmpass('')
+      setemailforcode('')
+      setroleforreset('')
+      return;
+    }
+  }
+
   function verify(){
     console.log(enteredotp)
     if(otp!=''){
     if(enteredotp==otp){
      setverified(true)
      toast('Verified!')
-     setloginshow(true)
-     setotpbtnshow(true)
+    
     }
   }
   }
 
   function handleback(){
     setloginshow(true)
-    setotpbtnshow(true)
+      setotpbtnshow(true)
+      setverified(false)
+      setnewpass('')
+      setconfirmpass('')
+      setemailforcode('')
+      setroleforreset('')
   }
 
   async function HandleSubmit() {
@@ -150,10 +186,25 @@ const Login = () => {
     <div className={`${!loginshow?'block':'hidden'} flex flex-col gap-4 items-center mt-[25%] sm:mt-[10%] p-3 border-2 border-gray-700 sm:w-3/5 w-[80%] ml-[10%] sm:ml-[20%] rounded-3xl backdrop-blur-3xl bg-white/10 shadow-2xl shadow-gray-700`}>
     <div onClick={handleback} className='w-full text-start cursor-pointer text-gray-700 flex'><img src={back} alt="" /><div className='text-lg'>back</div></div>
     <input type="email" name="emaill" id="emaill" placeholder='Enter Email to send code' className='border-gray-700 border-2 rounded-2xl p-2 text-gray-600 w-full' value={emailforcode} onChange={(e)=>{setemailforcode(e.target.value)}}/>
+    <select
+        className="border-gray-700 border-2 rounded-2xl p-1 text-gray-600 w-full"
+        defaultValue=''
+        onChange={(e) => setroleforreset(e.target.value)}
+      >
+        <option value=''>Select Role</option>
+        <option value="Admin">Admin</option>
+        <option value="Patient">Patient</option>
+        <option value="Doctor">Doctor</option>
+      </select>
     <button onClick={handleotpbtn} className={`${otpbtnshow?'block':'hidden'}  border-gray-700 border-2 rounded-b-full hover:text-white hover:bg-gray-600 transition-colors duration-500 w-full`}>{otpbtn}</button>
-    <div className={`${!otpbtnshow?'block':'hidden'} flex flex-col  md:flex-row md:justify-between w-full gap-3`}>
+    <div className={`${!otpbtnshow&&!verified?'block':'hidden'} flex flex-col  md:flex-row md:justify-between w-full gap-3`}>
       <input type="text" placeholder='6-digit OTP' value={enteredotp} onChange={(e)=>{setenteredotp(e.target.value)}} className='border-gray-700 border-2 rounded-2xl p-2 text-gray-600'/>
-      <button className='border-gray-700 border-2 rounded-full hover:text-white hover:bg-gray-600 transition-colors duration-500 w-1/2 md:w-1/8' onClick={verify}>Verify</button>
+      <button className='border-gray-700 border-2 rounded-full hover:text-white hover:bg-gray-600 transition-colors duration-500 w-1/2 md:w-1/8' onClick={verify}>{verified?'Verified':'Verify'}</button>
+    </div>
+    <div className={`${verified?'block':'hidden'} w-full flex flex-col gap-2 items-center`}>
+      <input type="text" placeholder='Enter New Password' value={newpass} onChange={(e)=>{setnewpass(e.target.value)}} className='border-gray-700 border-2 rounded-2xl p-1 text-gray-600 w-full'/>
+      <input type="text" placeholder='Confirm New Password' value={confirmpass} onChange={(e)=>{setconfirmpass(e.target.value)}} className='border-gray-700 border-2 rounded-2xl p-1 text-gray-600 w-full'/>
+      <button onClick={handlechangepass} className='border-gray-700 border-2 rounded-full hover:text-white hover:bg-gray-600 transition-colors duration-500 w-1/2 cursor-pointer'>Change Password</button>
     </div>
     </div>
     </>

@@ -70,4 +70,14 @@ modifyRouter.post("/modifypassword",async(req,res)=>{
     }
 })
 
+modifyRouter.post("/deldoctor",async(req,res)=>{
+    const {email}=req.body;
+    let doctor=await Doctor.findOne({email});
+    if(!doctor){
+       return res.status(400).send('No Doctor with this Email Found.');
+    }
+    let doctordel=await Doctor.deleteOne({email}).then(()=>res.status(200).send("Deleted Successfully")).catch(()=>res.status(400).send("Deletion Failed"))
+})
+
+
 export default modifyRouter;
