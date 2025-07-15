@@ -70,7 +70,7 @@ const Signup = () => {
       setotpbtntxt("Wait...");
       let res = await axios.post(
         `${import.meta.env.VITE_BACKEND_URI}/api/auth/sendotp`,
-        { email: mail }
+        { email: mail , type: 'Sign Up'}
       );
       setotp(res.data);
       toast(`OTP sent to your mail. If you did'nt see check spam box also.`);
@@ -78,7 +78,8 @@ const Signup = () => {
       setverifybtn("block");
       setotpbtntxt("Verify Email");
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data);
+      toast(err.response.data+' Retry Please!');
     }
   };
 

@@ -2,6 +2,7 @@ import express from 'express'
 import multer from "multer";
 import cloudinary from '../config/cloudinaryconfig.js';
 import Doctor from '../models/doctorSchema.js';
+import User from '../models/userSchema.js';
 
 const storage=multer.memoryStorage();
 const upload=multer({storage});
@@ -46,5 +47,27 @@ modifyRouter.post("/modifyDp",upload.single("photo"),async (req,res)=>{
     }
 } )
 
+
+modifyRouter.post("/modifypassword",async(req,res)=>{
+    const {mail,role,password}=req.body;
+    if(role=='Patient'||role=='Admin'){
+     let find=await User.findOne({email:mail});
+     if(!find){
+        return res.status(400).send(`${role} with this EMAIL not found`)
+     }
+     find.password=password;
+     await find.save();
+     return res.status(200).send('Password Reset Request Successfull!')
+    }
+    if(role=='Doctor'){
+     let find=await Doctor.findOne({email:mail});
+     if(!find){
+           return res.status(400).send(`${role} with this EMAIL not found`)
+    }
+    find.password=password;
+     await find.save();
+     return res.status(200).send('Password Reset Request Successfull!')
+    }
+})
 
 export default modifyRouter;
