@@ -122,8 +122,10 @@ export const login = async (req, res, next) => {
 };
 
 export const getdetails = async function (req, res) {
+  console.log(req.query.cookieName);
   let cookieName = req.query.cookieName;
   let token = req.cookies[cookieName];
+  console.log(token);
   if (!token) {
     return res.status(400).send("No Logged IN Detected...");
   }
