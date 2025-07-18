@@ -137,17 +137,44 @@ export const getdetails = async function (req, res) {
   if (req.cookies.adminToken || req.cookies.patientToken) {
     let user = await User.findOne({ email: data.email });
     if(!user){
-      return res.status(400).send(`No User Exists Email: ${data} ${req.query.cookieName} 1`)
+      return res.status(400).send(`No User Exists ${req.query.cookieName} 1`)
     }
     return res.status(200).send(user);
   }
   if (req.cookies.doctorToken) {
     let doctor = await Doctor.findOne({ email: data.email });
     if(!doctor){
-      return res.status(400).send(`No Doctor with this Email Exists Email: ${data} ${req.query.cookieName} 2`)
+      return res.status(400).send(`No Doctor with this Email Exists Email: ${data} ${req.query.cookieName} `)
     }
     return res.status(200).send(doctor);
   }
+};
+
+export const getdetailsdoctor = async function (req, res) {
+  let cookieName = req.query.cookieName;
+  let token = req.cookies[cookieName];
+  console.log(token);
+
+  if (!token) {
+    return res.status(400).send("No Logged IN Detected...");
+  }
+
+  let data;
+  try {
+    data = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  } catch (err) {
+    return res.status(400).send("Invalid Or Expired Token!!!!!");
+  }
+
+  if (req.cookies.doctorToken) {
+    let doctor = await Doctor.findOne({ email: data.email });
+    if (!doctor) {
+      return res.status(400).send(`No Doctor with this Email Exists Email: ${data} ${req.query.cookieName} 2`);
+    }
+    return res.status(200).send(doctor);
+  }
+
+  return res.status(400).send("Invalid Role or Token");
 };
 
 export const RequestDoc = async function (req, res) {
