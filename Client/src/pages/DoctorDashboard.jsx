@@ -31,6 +31,7 @@ const DoctorDashboard = () => {
       setloading(false)
     }
     catch(err){
+      toast(err.response.data);
       console.log(err)
       Navigate('/login')
     }
