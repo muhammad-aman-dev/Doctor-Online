@@ -148,7 +148,33 @@ const Me = () => {
   }
 
   if (loading) {
-    return <div className='font-bold flex justify-center text-sm font-sans text-black'><div>Loading....</div></div>
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#0F172A]">
+        <div className="flex flex-col items-center gap-4">
+          <svg
+            className="animate-spin h-12 w-12 text-blue-400"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+            ></path>
+          </svg>
+          <p className="text-white text-xl font-semibold font-sans">Loading Patient Dashboard...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -181,13 +207,19 @@ const Me = () => {
         <>
           <h1 className='text-2xl font-bold text-center text-white underline mt-6'>Select Doctor</h1>
           <div className="mt-4 flex justify-center">
-            <select onChange={handlefilter} defaultValue={''} className='p-2 rounded-md bg-white text-black font-semibold'>
+          <select
+  onChange={handlefilter}
+  defaultValue={''}
+  className="p-2 rounded-md bg-[#1E40AF] text-white font-semibold border border-white shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+>
+
               <option value=''>Filter by City</option>
               {[
                 "Multan", "Islamabad", "Lahore", "Karachi", "Peshawar", "Quetta", "Faisalabad", "Rawalpindi",
                 "Sialkot", "Gujranwala", "Hyderabad", "Bahawalpur", "Sargodha", "Sukkur", "Abbottabad",
                 "Mardan", "Rahim Yar Khan", "Larkana", "Sheikhupura", "Mirpur", "Okara", "Dera Ghazi Khan"
-              ].map(city => <option key={city} value={city}>{city}</option>)}
+              ].map(city => <option key={city} value={city} className="bg-[#1E3A8A] text-white">{city}</option>
+              )}
             </select>
           </div>
 

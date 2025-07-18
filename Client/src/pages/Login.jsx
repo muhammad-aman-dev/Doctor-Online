@@ -90,6 +90,17 @@ const Login = () => {
     }
   }
 
+  const handlelogout=async ()=>{
+    console.log("CLICKED")
+   let res= await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/auth/logout`,{},{
+      withCredentials:true
+    })
+    console.log(res.status)
+    console.log(res.data)
+    toast('Now Try Login Again!!!')
+
+  }
+
   function verify(){
     console.log(enteredotp)
     if(otp!=''){
@@ -182,6 +193,7 @@ const Login = () => {
       <div className='text-sm font-light text-gray-600'>
         Note! If failed to login select role again
       </div>
+      <div className='text-sm font-light text-gray-600'>Facing problems in Login? <p className='inline underline text-blue-700 cursor-pointer' onClick={handlelogout}>Click Here</p> to reset previous logins</div>
     </div>
     <div className={`${!loginshow?'block':'hidden'} flex flex-col gap-4 items-center mt-[25%] sm:mt-[10%] p-3 border-2 border-gray-700 sm:w-3/5 w-[80%] ml-[10%] sm:ml-[20%] rounded-3xl backdrop-blur-3xl bg-white/10 shadow-2xl shadow-gray-700`}>
     <div onClick={handleback} className='w-full text-start cursor-pointer text-gray-700 flex'><img src={back} alt="" /><div className='text-lg'>back</div></div>

@@ -12,7 +12,7 @@ const logs=new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        expires: 10  // 2 days in seconds
+        expires: 21600  //6 Hours 
       }
 })
 

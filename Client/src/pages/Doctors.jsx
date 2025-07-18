@@ -29,7 +29,30 @@ const Doctors = () => {
     return (
       <>
         <Navbar />
-        <div className="text-white text-xl mt-3 text-center">Loading....</div>
+        <div className="flex flex-col items-center gap-4 mt-12">
+        <svg
+          className="animate-spin h-12 w-12 text-blue-400"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+          ></path>
+        </svg>
+        <p className="text-blue-400 text-xl font-semibold font-sans">Loading Doctors...</p>
+      </div>
+      <div className='text-center text-blue-400 mt-6'>Please Note That all of the doctors now are sample and did not exist in real.</div>
       </>
     );
   }
@@ -40,21 +63,23 @@ const Doctors = () => {
     <div className="h-3 bg-gradient-to-b from-white to-[#0F172A]" />
     <div className="min-h-screen font-sans text-gray-100 bg-[#0F172A] pt-6">
       <div className="mt-4 flex justify-center">
-        <select
-          name="filter"
-          defaultValue=""
-          onChange={handlefilter}
-          className="p-2 rounded-md border-1 bg-white text-black font-semibold"
-        >
-          <option value="" >Filter by City</option>
-          {[
-            "Multan", "Islamabad", "Lahore", "Karachi", "Peshawar", "Quetta", "Faisalabad", "Rawalpindi",
-            "Sialkot", "Gujranwala", "Hyderabad", "Bahawalpur", "Sargodha", "Sukkur", "Abbottabad",
-            "Mardan", "Rahim Yar Khan", "Larkana", "Sheikhupura", "Mirpur", "Okara", "Dera Ghazi Khan"
-          ].map(city => (
-            <option key={city} value={city}>{city}</option>
-          ))}
-        </select>
+      <select
+  name="filter"
+  defaultValue=""
+  onChange={handlefilter}
+  className="p-2 rounded-md bg-[#1E3A8A] text-white font-semibold border border-white shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+>
+  <option value="" className="bg-[#1E3A8A] text-white">Filter by City</option>
+  {[
+    "Multan", "Islamabad", "Lahore", "Karachi", "Peshawar", "Quetta", "Faisalabad", "Rawalpindi",
+    "Sialkot", "Gujranwala", "Hyderabad", "Bahawalpur", "Sargodha", "Sukkur", "Abbottabad",
+    "Mardan", "Rahim Yar Khan", "Larkana", "Sheikhupura", "Mirpur", "Okara", "Dera Ghazi Khan"
+  ].map(city => (
+    <option key={city} value={city} className="bg-[#1E3A8A] text-white">
+      {city}
+    </option>
+  ))}
+</select>
       </div>
 
       <div className="doctors flex flex-col items-center gap-4 mt-9 px-4 pb-10">

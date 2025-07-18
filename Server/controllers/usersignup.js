@@ -135,10 +135,16 @@ export const getdetails = async function (req, res) {
   }
   if (req.cookies.adminToken || req.cookies.patientToken) {
     let user = await User.findOne({ email: data.email });
+    if(!user){
+      return res.status(400).send('No User Exists')
+    }
     return res.status(200).send(user);
   }
   if (req.cookies.doctorToken) {
     let doctor = await Doctor.findOne({ email: data.email });
+    if(!doctor){
+      return res.status(400).send('No User Exists')
+    }
     return res.status(200).send(doctor);
   }
 };
