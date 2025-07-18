@@ -14,7 +14,7 @@ export const generateCookie= (user,status,message,res) => {
     httpOnly:true,
     expires:new Date(Date.now()+process.env.COOKIE_EXPIRE*24*60*60*1000),
     path: "/",             // must match   
-    sameSite: "Lax",       // must match
-    secure: false,   
+    sameSite: "None",       // must match
+    secure: true,   
    }).send(message);
 }   
