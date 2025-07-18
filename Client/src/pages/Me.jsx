@@ -104,10 +104,11 @@ const Me = () => {
      try{
    let response=await axios.post(`${import.meta.env.VITE_BACKEND_URI}/message/newmessage`,data);
    if(response.status==200){
-    toast("Your Request sent. Refresh the page!");
+    toast("Your Request sent!");
     setNotselected(true);
     setmessage(false);
     setmessagereq('');
+getmessages();
    }
      }
      catch(err){
