@@ -167,7 +167,7 @@ return formatted;
     <section ref={closeref} className='left absolute z-10 md:static w-[330px] duration-700 translate-x-[0px] sm:w-[270px] border-2 mt-2 rounded-2xl bg-[#1E3A8A]'>
     <img src={close} alt="close" onClick={handleClose} className='cursor-pointer absolute right-2 top-2 hover:scale-140 duration-150 inline md:hidden' />
     <div className='m-3 flex flex-col items-center gap-3 px-8 justify-between'>
-    <div className='border-1 rounded-[100%] border-amber-50 w-[150px] sm:w-[200px] md:w-[300] relative'><img src={details.dpURL} alt="Doctor Dp" className='object-cover object-top rounded-[100%]'/><img src={edit} alt="edit" className='absolute bottom-0 left-[40%] sm:left-[44%] bg-black border-2 rounded-full' onClick={handleEdit}/></div>
+    <div className='border-1 rounded-[100%] border-amber-50 w-[150px] sm:w-[200px] relative'><img src={details.dpURL} alt="Doctor Dp" className='object-cover object-top rounded-[100%]'/><img src={edit} alt="edit" className='absolute bottom-0 left-[40%] sm:left-[44%] bg-black border-2 rounded-full' onClick={handleEdit}/></div>
     <div className="details">
       <div className="mt-4 w-full px-4 text-sm text-gray-100 font-medium space-y-2">
   <div className="flex justify-between border-b border-gray-700 pb-1">
