@@ -7,9 +7,9 @@ export const getDoctors=async(req,res)=>{
     const {password,...rest}=original;
     return rest;
  })
- res.send(newdata).status(200)
+ res.status(200).send(newdata)
 }
 catch(err){
-    res.send(err).status(400)
+    res.status(400).send(err)
 }
 } 
