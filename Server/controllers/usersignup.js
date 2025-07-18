@@ -122,7 +122,6 @@ export const login = async (req, res, next) => {
 };
 
 export const getdetails = async function (req, res) {
-  console.log(req.query.cookieName);
   let cookieName = req.query.cookieName;
   let token = req.cookies[cookieName];
   console.log(token);
@@ -138,14 +137,14 @@ export const getdetails = async function (req, res) {
   if (req.cookies.adminToken || req.cookies.patientToken) {
     let user = await User.findOne({ email: data.email });
     if(!user){
-      return res.status(400).send('No User Exists')
+      return res.status(400).send(`No User Exists Email: ${data} ${req.query.cookieName}`)
     }
     return res.status(200).send(user);
   }
   if (req.cookies.doctorToken) {
     let doctor = await Doctor.findOne({ email: data.email });
     if(!doctor){
-      return res.status(400).send(`No Doctor with this Email Exists Email: ${data}`)
+      return res.status(400).send(`No Doctor with this Email Exists Email: ${data} ${req.query.cookieName}`)
     }
     return res.status(200).send(doctor);
   }
