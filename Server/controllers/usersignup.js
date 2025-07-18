@@ -145,7 +145,7 @@ export const getdetails = async function (req, res) {
   if (req.cookies.doctorToken) {
     let doctor = await Doctor.findOne({ email: data.email });
     if(!doctor){
-      return res.status(400).send(`No Doctor with this Email Exists Email: ${data.email}`)
+      return res.status(400).send(`No Doctor with this Email Exists Email: ${data}`)
     }
     return res.status(200).send(doctor);
   }
