@@ -235,6 +235,9 @@ const Admin = () => {
 <div className="mt-2">
 <h5 className="font-bold">Email: {doctor.email}</h5>
 </div>
+<div className="mt-2">
+<h5 className="font-bold">Email: {doctor.phone}</h5>
+</div>
                 <div className="mt-2">
                   <h5 className="font-bold">Clinic Address</h5>
                   <p className="bg-slate-800 rounded-lg p-3 mt-1 text-sm text-gray-200">{doctor.clinicaddress}</p>
