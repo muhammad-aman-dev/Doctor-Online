@@ -10,7 +10,7 @@ const Doctors = () => {
   const getDoctors = async () => {
     try {
       let res = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/api/auth/getDoctors`);
-      setdoctors(res.data || []);
+      setdoctors(res.data);
       setLoading(false);
     } catch (err) {
       console.log(err);
