@@ -23,7 +23,7 @@ const DoctorDashboard = () => {
   async function getdetails(){
     console.log("getting details")
     try{
-      let res=await axios.get(`${import.meta.env.VITE_BACKEND_URI}/api/auth/getdetails?cookieName=doctorToken`,{
+      let res=await axios.get(`${import.meta.env.VITE_BACKEND_URI}/api/auth/getdetailsdoctor?cookieName=doctorToken`,{
         withCredentials:true
       })
     let data=res.data;
