@@ -10,11 +10,11 @@ const DEFAULT_DP_URL = process.env.Default_DP;
 const doctorSchema= new mongoose.Schema({
     email:{
     type:String,
-    reuired:[true,"Email is required!!!"]
+    required:[true,"Email is required!!!"]
     }, 
     password:{
     type:String,
-    reuired:[true,"Password is reuired!!!"]
+    required:[true,"Password is reuired!!!"]
     },
     fullname:{
         type:String,
