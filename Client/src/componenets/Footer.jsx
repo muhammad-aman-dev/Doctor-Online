@@ -4,8 +4,8 @@ const Footer = () => {
   return (
   <footer className='bg-black text-white mt-10'>
    <div className='text-center pt-6'>📍 Location: Multan  
-📞 Phone: +123 456 7890  
-✉️ Email: support@doctoronline.com
+📞 Phone: +92 3067849161  
+✉️ Email: amanmuhammad567@gmail.com
  </div>
  <div className='text-center mt-5 text-sm'>Privacy Policy  
 Terms & Conditions  
