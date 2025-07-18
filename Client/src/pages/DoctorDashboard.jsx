@@ -33,7 +33,6 @@ const DoctorDashboard = () => {
     catch(err){
       toast(err.response.data);
       console.log(err)
-      Navigate('/login')
     }
     }
   useEffect(() => {
