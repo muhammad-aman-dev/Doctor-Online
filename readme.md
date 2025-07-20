@@ -9,7 +9,6 @@
   <img src="https://img.shields.io/badge/Backend-Node.js-green?style=flat-square" />
   <img src="https://img.shields.io/badge/Database-MongoDB-brightgreen?style=flat-square" />
   <img src="https://img.shields.io/badge/Deployed%20on-Vercel-%23000000?style=flat-square" />
-  <img src="https://img.shields.io/github/license/muhammad-aman-dev/Doctor-Online?style=flat-square" />
 </p>
 
 ---
