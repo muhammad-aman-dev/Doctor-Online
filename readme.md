@@ -34,7 +34,7 @@ All roles have distinct dashboards for a streamlined experience.
 
 ## 🚀 Live Demo
 
-🌐 Coming soon: [doctoronlinefrontend.vercel.app](doctoronlinefrontend.vercel.app)
+🌐 : [doctoronlinefrontend.vercel.app](doctoronlinefrontend.vercel.app)
 
 ---
 
