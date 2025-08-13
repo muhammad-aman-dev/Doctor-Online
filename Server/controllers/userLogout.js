@@ -3,7 +3,7 @@ export const logout = async (req, res) => {
     path: "/",             
     httpOnly: true,        
     sameSite: "Lax",       
-    secure: false,         
+    secure: true,         
   }; 
 
   res.clearCookie("adminToken", options);
