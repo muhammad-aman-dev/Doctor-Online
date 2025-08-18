@@ -21,4 +21,4 @@ export const deldoc=async (req,res)=>{
     catch(err){
         return res.status(400).send('No Doctor Found')
     }
-}
+} 
